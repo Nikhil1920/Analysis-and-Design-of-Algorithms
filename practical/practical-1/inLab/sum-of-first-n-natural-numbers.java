@@ -1,10 +1,10 @@
 class sum {
     public static void main(String[] args) {
-        int sum = sumOfN(3);
+        int sum = sumOfNNaturalNums(3);
         System.out.println("sum is = " + sum);
     }
 
-    public static int sumOfN(int n) {
+    public static int sumOfNNaturalNums(int n) {
         int result = 0;
         for (int i = 1; i <= n; i++) {
             result += i;
