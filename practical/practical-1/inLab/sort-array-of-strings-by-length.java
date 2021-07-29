@@ -1,6 +1,6 @@
 class sortArrayOfStrings {
 
-    static void mySort(String[] s, int n) {
+    static void sort(String[] s, int n) {
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 String temp = "";
@@ -13,22 +13,15 @@ class sortArrayOfStrings {
         }
     }
 
-    // Function to print the sorted array of string
-    static void printArraystring(String str[], int n) {
-        for (int i = 0; i < n; i++)
-            System.out.print(str[i] + " ");
-    }
-
-    // Driver function
     public static void main(String args[]) {
         String[] arr = { "you", "are", "beautiful", "looking" };
         int n = arr.length;
 
-        // Function to perform sorting
-        mySort(arr, n);
+        // calling the Function to perform sorting
+        sort(arr, n);
 
-        printArraystring(arr, n);
-
+        System.out.println("Sorted array of strings:");
+        for (int i = 0; i < n; i++)
+            System.out.print(arr[i] + " ");
     }
-
 }
