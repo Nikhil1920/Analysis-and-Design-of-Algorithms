@@ -8,29 +8,17 @@ class ComparingElementsInTheArray {
             boolean isNo = true;
             int n = sc.nextInt();
             int[] arr = new int[n];
+            int total_sum = 0;
             for (int i = 0; i < n; i++) {
                 arr[i] = sc.nextInt();
+                total_sum += arr[i];
             }
-            if (n == 1) {
-                System.out.println("YES");
-                num_of_test_cases--;
-                continue;
-            }
-
-            for (int i = 0; i < n; i++) {
-                int left_sum = 0;
-                int right_sum = 0;
-                int j = 0;
-                for (; j < i; j++) {
-                    left_sum += arr[j];
-                }
-                for (j++; j < n; j++) {
-                    right_sum += arr[j];
-                }
-                if (left_sum == right_sum) {
+            int sum = 0;
+            for (int current : arr) {
+                if (2 * sum == total_sum - current)
                     isNo = false;
-                    break;
-                }
+                else
+                    sum += current;
             }
             System.out.println(isNo ? "NO" : "YES");
             num_of_test_cases--;
