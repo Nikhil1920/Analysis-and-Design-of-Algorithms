@@ -20,12 +20,12 @@ class ComparingElementsInTheArray {
             for (int i = 0; i < n; i++) {
                 int left_sum = 0;
                 int right_sum = 0;
-                for (int j = 0; j < n; j++) {
-                    if (j < i) {
-                        left_sum += arr[j];
-                    } else if (j > i) {
-                        right_sum += arr[j];
-                    }
+                int j = 0;
+                for (; j < i; j++) {
+                    left_sum += arr[j];
+                }
+                for (j++; j < n; j++) {
+                    right_sum += arr[j];
                 }
                 if (left_sum == right_sum) {
                     isNo = false;
