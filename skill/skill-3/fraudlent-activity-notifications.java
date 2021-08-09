@@ -6,8 +6,6 @@ class fradulentActivityNotifications {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int d = sc.nextInt();
-        int d_half = d / 2;
-        int odd_middle = (d + 1) / 2;
         boolean isEven = true;
         if (d % 2 != 0)
             isEven = false;
@@ -16,20 +14,44 @@ class fradulentActivityNotifications {
         for (int i = 0; i < n; i++) {
             expenditure[i] = sc.nextInt();
         }
-        for (int i = 0; i < n - d - 1; i++) {
-            int median = 0;
-            int[] temp = new int[d];
-            for (int j = 0; j < d; j++) {
-                temp[j] = expenditure[i + j];
-            }
-            Arrays.sort(temp);
+        int[] data = new int[201];
+        for (int i = 0; i < d; i++) {
+            data[expenditure[i]]++;
+        }
+        for (int i = d; i < expenditure.length; i++) {
+
+            double median_double = 0;
             if (isEven) {
-                median = (temp[d_half] + temp[d_half + 1]);
+                Integer m1 = null;
+                Integer m2 = null;
+                int count = 0;
+                for (int j = 0; j < data.length; j++) {
+                    count += data[j];
+                    if (m1 == null && count >= d / 2) {
+                        m1 = j;
+                    }
+                    if (m2 == null && count >= d / 2 + 1) {
+                        m2 = j;
+                        break;
+                    }
+                }
+                median_double = (m1 + m2);
             } else {
-                median = temp[odd_middle] * 2;
+                int count = 0;
+                for (int j = 0; j < data.length; j++) {
+                    count += data[j];
+                    if (count > d / 2) {
+                        median_double = j * 2;
+                        break;
+                    }
+                }
             }
-            if (expenditure[i + d + 1] >= median)
+
+            if (expenditure[i] >= median_double) {
                 warning_count++;
+            }
+            data[expenditure[i]]++;
+            data[expenditure[i - d]]--;
         }
         System.out.println(warning_count);
         sc.close();
