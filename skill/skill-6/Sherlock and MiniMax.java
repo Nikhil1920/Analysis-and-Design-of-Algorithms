@@ -1,34 +1,60 @@
 
 // SherlockAndMiniMax
+import java.util.Arrays;
 import java.util.Scanner;
 
-class Solution {
+class SherlockAndMiniMax {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int[] array = new int[n];
+        long[] array = new long[n];
         for (int i = 0; i < n; i++)
-            array[i] = sc.nextInt();
+            array[i] = sc.nextLong();
 
-        int p = sc.nextInt();
-        int q = sc.nextInt();
+        long p = sc.nextLong();
+        long q = sc.nextLong();
 
-        int max = Integer.MIN_VALUE;
-        int m = p;
-        int res = p;
+        Arrays.sort(array);
 
-        for (int i = p; i <= q; i++) {
-            int min = Integer.MAX_VALUE;
-            for (int j = 0; j < n; j++) {
-                if (Math.abs(array[j] - i) < min) {
-                    min = Math.abs(array[j] - i);
-                    m = i;
+        long res;
+        if (array[0] > q)
+            res = p;
+        else if (array[n - 1] < p)
+            res = q;
+        else {
+            long ans = -1;
+            long num = -1;
+            if (array[0] > p) {
+                if (ans < (array[0] - p)) {
+                    ans = (array[0] - p);
+                    num = p;
                 }
             }
-            if (min > max) {
-                max = min;
-                res = m;
+
+            if (array[n - 1] < q) {
+                if (ans < (q - array[n - 1])) {
+                    ans = (q - array[n - 1]);
+                    num = q;
+                }
             }
+            for (int i = 0; i < n - 1; i++) {
+                long cur = (array[i] + array[i + 1]) / 2;
+                if (cur <= q && cur >= p && (cur - array[i]) > ans) {
+                    ans = (cur - array[i]);
+                    num = cur;
+                } else if (cur > q) {
+                    if ((q - array[i]) > ans) {
+                        ans = (q - array[i]);
+                        num = q;
+                    }
+                } else if (cur < p) {
+                    if ((array[i + 1] - p) > ans) {
+                        ans = (array[i + 1] - p);
+                        num = p;
+                    }
+                }
+            }
+            res = num;
         }
         System.out.println(res);
         sc.close();
